@@ -22,11 +22,7 @@ classdef NRDemodulator < matlab.System
     properties(Access = private, Hidden)
         hMod
     end
-    
-    methods(Access = protected)
-
-    end
-    
+        
     methods
         function obj = NRDemodulator(varargin)
             setProperties(obj,nargin,varargin{:});
@@ -62,7 +58,8 @@ classdef NRDemodulator < matlab.System
             else
                 error('ldpc_3gpp_matlab:UnsupportedParameters','Unsupported modulation');
             end
-        end        
+        end      
+        
     end
     
     
@@ -88,9 +85,8 @@ classdef NRDemodulator < matlab.System
             tx = step(obj.hMod, bits);
         end
         
-        function resetImpl(obj)
-            
+        function processTunedPropertiesImpl(obj)
+            obj.hMod.Variance = obj.Variance;
         end
-        
     end
 end
